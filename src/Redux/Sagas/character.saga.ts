@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import * as ActionTypes from "../ActionTypes/character.action.types";
 import * as ActionCreators from "../ActionCreators/character.action.creators";
-import {postCharacter, putCharacter, getCharacter, getCharacters, deleteCharacter} from '../Services/character.services.ts';
+import {postCharacter, putCharacter, getCharacter, getCharacters, deleteCharacter} from '../Services/character.services';
 
 function* addCharacter({ payload, callback }: ActionTypes.AddCharacterAction) {
   try {

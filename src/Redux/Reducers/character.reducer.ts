@@ -1,3 +1,4 @@
+import { Race, Profession } from "../../lib/character.constants";
 import * as ActionTypes from "../ActionTypes/character.action.types";
 
 const initialState: Character = {

@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import * as ActionTypes from "../ActionTypes/chatgpt.action.types.ts";
-import * as ActionCreators from "../ActionCreators/chatgpt.action.creators.ts";
-import { getChatGPTResponses, postChatGPTRequest, getChatGPTMessages } from '../Services/chatgpt.services.ts';
+import * as ActionTypes from "../ActionTypes/chatgpt.action.types";
+import * as ActionCreators from "../ActionCreators/chatgpt.action.creators";
+import { getChatGPTResponses, postChatGPTRequest, getChatGPTMessages } from '../Services/chatgpt.services';
 
 function* getPrompts({ callback }: ActionTypes.GetPromptsAction) {
     try {

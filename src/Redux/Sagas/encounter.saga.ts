@@ -1,7 +1,7 @@
 import { call, put, takeLatest, fork, all } from "redux-saga/effects";
 import * as ActionTypes from "../ActionTypes/encounter.action.types";
 import * as ActionCreators from "../ActionCreators/encounter.action.creators";
-import { postEncounter, getEncounters, deleteEncounter } from '../Services/encounter.services.ts';
+import { postEncounter, getEncounters, deleteEncounter } from '../Services/encounter.services';
 
 function* addEncounter({ payload, callback }: ActionTypes.AddEncounterAction) {
     try {

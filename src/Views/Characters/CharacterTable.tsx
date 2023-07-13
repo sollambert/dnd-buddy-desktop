@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import {
   getCharacters,
   deleteCharacter,
-} from "../../Redux/ActionCreators/character.action.creators.ts"
+} from "../../Redux/ActionCreators/character.action.creators"
 import { useSelector } from "react-redux";
-import { RootState } from "../../Redux/store.ts";
+import { RootState } from "../../Redux/store";
 import { useHistory } from "react-router-dom";
 
 function CharacterTable(): JSX.Element {

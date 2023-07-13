@@ -1,7 +1,7 @@
 import { call, put, takeLatest, fork, all } from "redux-saga/effects";
 import * as ActionTypes from "../ActionTypes/campaign.action.types";
 import * as ActionCreators from "../ActionCreators/campaign.action.creators";
-import { postCampaign, postCampaignNote, getCampaigns, deleteCampaign, getCampaignInfo, getCampaignById } from '../Services/campaign.services.ts';
+import { postCampaign, postCampaignNote, getCampaigns, deleteCampaign, getCampaignInfo, getCampaignById } from '../Services/campaign.services';
 
 function* addCampaign({ payload, callback }: ActionTypes.AddCampaignAction) {
     try {

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import FormInput from "../../Components/FormInput.tsx";
+import FormInput from "../../Components/FormInput";
 import { useDispatch } from "react-redux";
-import { addCharacter, updateCharacter } from "../../Redux/ActionCreators/character.action.creators.ts";
+import { addCharacter, updateCharacter } from "../../Redux/ActionCreators/character.action.creators";
+import { Profession, Race } from "../../lib/character.constants";
 
 type Props = {
   editCharacter?: Character;

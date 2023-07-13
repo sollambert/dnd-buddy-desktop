@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { RootState } from "../../Redux/store.ts";
+import { RootState } from "../../Redux/store";
 import { addCampaignNote, getCampaign } from "../../Redux/ActionCreators/campaign.action.creators";
-import BackButton from "../../Components/Buttons/BackButton.tsx";
-import CampaignNoteComponent from "./CampaignNoteComponent.tsx";
+import BackButton from "../../Components/Buttons/BackButton";
+import CampaignNoteComponent from "./CampaignNoteComponent";
 
 type Props = {
 };

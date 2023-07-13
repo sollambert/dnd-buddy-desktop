@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import FormInput from "../../Components/FormInput.tsx";
 import { useDispatch } from "react-redux";
 import { addCharacter, updateCharacter } from "../../Redux/ActionCreators/character.action.creators.ts";
-import { Character } from "../../@types/global";
 import { Race, Profession } from "../../Constants/character.ts";
 
 type Props = {

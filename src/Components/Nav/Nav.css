@@ -1,13 +1,21 @@
 .nav-button {
-    background-color: #333333;
+    /* background-color: #333333; */
+    background-color: #AAAAAA;
     border-radius: .3em;
-    border: #444444 1px;
-    color: #FFFFFF;
+    border: 1px solid  #444444;
+    /* color: #FFFFFF; */
+    color: #333333;
     height: 2em;
     width: 15vw;
     display: flex;
+    text-align: center;
     flex-direction: column;
     justify-content: center;
     text-decoration: none;
     margin-bottom: .25em;
+}
+
+.nav-button:hover {
+    background-color: #FFFFAA;
+    color: #222222;
 }

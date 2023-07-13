@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import ResourceItem from "./ResourceItem";
 import ResourceLink from "./ResourceLink";
 import { useEffect, useState } from "react";
+import BackButton from "../../Components/Buttons/BackButton";
 
 type Props = {
   details: Details;
@@ -36,12 +37,15 @@ function ResourceDetails({ details, direction, changeTitle, searchBar }: Props):
     <>
       {/* Display search bar if enabled through props */}
       {searchBar ?
-        <input
-          style={{ width: "20vw", height: "2em" }}
-          type="text"
-          placeholder="Search..."
-          value={search}
-          onChange={(e) => { setSearch(e.target.value) }} /> : ''}
+        <div style={{display: "flex", position: "sticky", top: "0px"}}>
+          <input
+            style={{ width: "100%", height: "2em", opacity: "100%"  }}
+            type="text"
+            placeholder="Search..."
+            value={search}
+            onChange={(e) => { setSearch(e.target.value) }} />
+          <BackButton height={"3.1em"}/>
+        </div> : ''}
       <div
         style={{
           border: "1px solid #000000",
@@ -68,8 +72,8 @@ function ResourceDetails({ details, direction, changeTitle, searchBar }: Props):
               return (
                 <div key={i}>
                   {details[detail]
-                  && (details[detail].length === undefined
-                    || details[detail].length !== 0) ? (
+                    && (details[detail].length === undefined
+                      || details[detail].length !== 0) ? (
                     <div style={{ display: "flex", flexDirection: "row" }}>
                       {/* Prevent array index from displaying */}
                       {Array.isArray(details) ? (

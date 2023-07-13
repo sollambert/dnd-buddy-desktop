@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import ResourceLink from "./ResourceLink";
 import ResourceItem from "./ResourceItem";
 import ResourceDetails from "./ResourceDetails";
+import BackButton from "../../Components/Buttons/BackButton";
 
 type Params = {
   endpoint?: string;
@@ -105,12 +106,16 @@ function Resources(): JSX.Element {
           {result?.results
             ?
             <>
-              <input
-                style={{ width: "20vw", height: "2em" }}
-                type="text"
-                placeholder="Search..."
-                value={search}
-                onChange={(e) => { setSearch(e.target.value) }} />
+              <div style={{ display: "flex", position: "sticky", top:"0px"}}>
+                <input
+                  style={{ width: "100%", height: "2em", opacity: "100%" }}
+                  type="text"
+                  placeholder="Search..."
+                  value={search}
+                  onChange={(e) => { setSearch(e.target.value) }} />
+
+                <BackButton height={"3.1em"} />
+              </div>
               <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>{
                 result.results.map((result, i) => {
                   if (search === ''
@@ -121,7 +126,7 @@ function Resources(): JSX.Element {
               </div>
             </>
             :
-            <ResourceDetails details={details} changeTitle={true} searchBar={true}/>}
+            <ResourceDetails details={details} changeTitle={true} searchBar={true} />}
         </>
       )}
     </>

@@ -1,10 +1,13 @@
 .resource-button {
-    background-color: #333333;
+    /* background-color: #333333; */
+    background-color: #AAAAAA;
     border-radius: .3em;
     border: #444444 1px;
-    color: #FFFFFF;
-    height: 2em;
+    /* color: #FFFFFF; */
+    color: #333333;
+    max-height: 2em;
     padding-inline: 2em;
+    white-space: nowrap;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,5 +16,15 @@
 }
 
 .resource-redirect {
-    color: blue;
+    color: #2222ff;
+    background-color: #AAAAAA;
+}
+.resource-redirect:hover {
+    color: #2222ff;
+    background-color: #FFFFAA;
+}
+
+.resource-button:hover {
+    background-color: #FFFFAA;
+    color: #222222;
 }

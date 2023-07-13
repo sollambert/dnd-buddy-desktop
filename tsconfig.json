@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -17,5 +18,8 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
+  "paths": {
+    "*": ["types/*.d.ts"]
+  },
   "references": [{ "path": "./tsconfig.node.json" }]
 }

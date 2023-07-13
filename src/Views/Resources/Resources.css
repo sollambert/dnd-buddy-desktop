@@ -1,0 +1,17 @@
+.resource-button {
+    background-color: #333333;
+    border-radius: .3em;
+    border: #444444 1px;
+    color: #FFFFFF;
+    height: 2em;
+    padding-inline: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration: none;
+    margin-bottom: .25em;
+}
+
+.resource-redirect {
+    color: blue;
+}

@@ -19,7 +19,7 @@ function FourOFour({
         <BackButton/>
         <h1>Oops, it seems you've wandered to the wrong lair.</h1>
         <h2>404</h2>
-        <img src="/images/404.png"/>
+        <img src="/404.png"/>
     </div>);
 }
 

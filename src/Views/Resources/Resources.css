@@ -3,6 +3,7 @@
     background-color: #AAAAAA;
     border-radius: .3em;
     border: #444444 1px;
+    font-weight: bolder;
     /* color: #FFFFFF; */
     color: #333333;
     max-height: 2em;
@@ -12,11 +13,13 @@
     flex-direction: column;
     justify-content: center;
     text-decoration: none;
+    align-items: center;
     margin-bottom: .25em;
 }
 
 .resource-redirect {
     color: #2222ff;
+    font-weight: bolder;
     background-color: #AAAAAA;
 }
 .resource-redirect:hover {

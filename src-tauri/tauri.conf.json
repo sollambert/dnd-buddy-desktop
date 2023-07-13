@@ -19,7 +19,7 @@
       },
       "fs": {
         "all": true,
-        "scope": ["$APP/*", "$DESKTOP/*"]
+        "scope": ["$APP/*", "$DESKTOP/*", "$APPDATA/*"]
       },
       "path": {
         "all": true

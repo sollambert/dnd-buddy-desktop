@@ -19,13 +19,13 @@ import Encounters from "./Views/Encounters/Encounters"
 import CharacterDetails from "./Views/Characters/CharacterDetails";
 
 import { BaseDirectory, createDir, writeFile } from "@tauri-apps/api/fs";
-
+import {appDataDir} from "@tauri-apps/api/path";
 function App() {
 
   const createDataFolder = async () => {
     try {
       await createDir("data", {
-        dir: BaseDirectory.Desktop,
+        dir: BaseDirectory.AppData,
         recursive: true,
       });
     } catch (error) {
@@ -37,24 +37,24 @@ function App() {
       await writeFile(
         {
           contents: "[]",
-          path: `./data/data.json`,
+          path: `config.json`,
         },
         {
-          dir: BaseDirectory.Desktop,
+          dir: BaseDirectory.AppData,
         }
       );
     } catch (e) {
       console.log(e);
     }
   };
-
   useEffect(() => {
     createDataFolder()
       .then(() => {
         setTest("Folder Created");
         createDataFile()
-          .then(() => {
-            setTest("File Created");
+          .then(async () => {
+            const appDataDirPath = await appDataDir();
+            setTest(appDataDirPath);
           }
           );
       });

@@ -32,6 +32,9 @@ function Nav(): JSX.Element {
       <Link to="/resources" className="nav-button">
         RESOURCES
       </Link>
+      <Link to="/404" className="nav-button">
+        404
+      </Link>
     </div>
   );
 }

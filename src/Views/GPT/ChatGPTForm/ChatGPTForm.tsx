@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { sendPrompt, getPrompts, getMessages } from '../../../Redux/ActionCreators/chatgpt.action.creators';
 import FormInput from '../../../Components/FormInput';
-import { ChatGPTRequest } from '../../../@types/global';
 
 type Props = {
     width?: string;

@@ -1,4 +1,3 @@
-import { CampaignNote, Campaign } from '../../@types/global';
 import axios from "axios";
 
 interface campaignResponse {

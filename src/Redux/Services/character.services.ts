@@ -1,4 +1,3 @@
-import Character from '../../Classes/Character/Character'
 import axios from "axios";
 
 interface characterResponse {

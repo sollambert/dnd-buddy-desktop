@@ -5,7 +5,6 @@ import { RootState } from "../../Redux/store.ts";
 import { addCampaignNote, getCampaign } from "../../Redux/ActionCreators/campaign.action.creators";
 import BackButton from "../../Components/Buttons/BackButton.tsx";
 import CampaignNoteComponent from "./CampaignNoteComponent.tsx";
-import { CampaignNote, Character, Encounter } from "../../@types/global";
 
 type Props = {
 };

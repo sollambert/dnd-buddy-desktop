@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 type Props = {
-    height: string
+    height?: string
 };
 
 function BackButton(props: Props): JSX.Element {

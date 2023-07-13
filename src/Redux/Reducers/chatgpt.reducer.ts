@@ -1,5 +1,3 @@
-import { Action } from "redux";
-import { ChatGPTRequest, ChatGPTResponse, Message } from "../../@types/global";
 import * as ActionTypes from "../ActionTypes/chatgpt.action.types";
 
 export const responseReducer = (

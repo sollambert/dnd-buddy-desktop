@@ -1,6 +1,3 @@
-import React from "react";
-import { CampaignNote } from "../../@types/global";
-
 type Props = {
     note: CampaignNote;
 };

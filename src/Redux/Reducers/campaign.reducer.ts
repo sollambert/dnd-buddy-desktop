@@ -1,5 +1,3 @@
-import { CampaignInfo, CampaignNote } from "../../@types/global";
-import { Campaign, Encounter, Character } from "../../@types/global";
 import * as ActionTypes from "../ActionTypes/campaign.action.types";
 
 const initialState: Campaign = {

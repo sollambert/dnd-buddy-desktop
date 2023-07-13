@@ -1,5 +1,3 @@
-import { CampaignInfo, CampaignNote, Campaign } from "../../@types/global";
-
 export const GET_CAMPAIGN = "campaign/GET_CAMPAIGN";
 export interface GetCampaignAction {
     type: typeof GET_CAMPAIGN;

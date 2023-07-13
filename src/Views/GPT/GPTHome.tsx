@@ -1,5 +1,3 @@
-import React from "react";
-
 import ChatGPTForm from "./ChatGPTForm/ChatGPTForm";
 import ChatGPTTable from "./ChatGPTTable/ChatGPTTable";
 

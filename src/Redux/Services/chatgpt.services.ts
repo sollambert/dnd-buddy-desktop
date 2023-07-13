@@ -1,5 +1,3 @@
-import ChatGPTRequest from "../../Classes/ChatGPT/ChatGPTRequest/ChatGPTRequest";
-import ChatGPTResponse, { Message } from "../../Classes/ChatGPT/ChatGPTResponse/ChatGPTResponse";
 import axios from 'axios';
 
 interface chatGPTResponse {

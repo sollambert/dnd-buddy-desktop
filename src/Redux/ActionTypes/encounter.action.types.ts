@@ -1,5 +1,3 @@
-import { Encounter } from "../../@types/global";
-
 export const GET_ENCOUNTER = "character/GET_ENCOUNTER";
 export interface GetEncounterAction {
     type: typeof GET_ENCOUNTER;

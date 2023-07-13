@@ -1,4 +1,3 @@
-import { Character } from "../../@types/global";
 import * as actions from "../ActionTypes/character.action.types";
 
 export function setCharacter(payload: Character): actions.SetCharacterAction {

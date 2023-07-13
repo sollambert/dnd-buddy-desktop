@@ -19,7 +19,7 @@
   },
   "include": ["src"],
   "paths": {
-    "*": ["types/*.d.ts"]
+    "*": ["@types/*.d.ts"]
   },
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,4 +1,3 @@
-import Encounter from '../../Classes/Encounter/Encounter'
 import axios from "axios";
 
 interface encounterResponse {

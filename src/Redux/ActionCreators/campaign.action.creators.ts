@@ -1,5 +1,3 @@
-import { CampaignInfo, CampaignNote } from "../../@types/global";
-import { Campaign } from "../../@types/global";
 import * as actions from "../ActionTypes/campaign.action.types";
 
 export function setCampaign(payload: Campaign): actions.SetCampaignAction {

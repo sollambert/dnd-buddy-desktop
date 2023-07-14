@@ -11,6 +11,6 @@ CREATE TABLE characters (
 	race INTEGER NOT NULL,
 	profession INTEGER NOT NULL,
 	background TEXT,
-	campaign_id INTEGER NULL,
+	campaign_id INTEGER,
 	FOREIGN KEY(campaign_id) REFERENCES campaigns(id)
 );

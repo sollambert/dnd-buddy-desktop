@@ -61,8 +61,8 @@ impl From<(String, i32, i32, i32, i32, i32, i32, i32, Option<String>, Race, Prof
     }
 }
 
-impl From<(String, String)> for NewCharacter {
-    fn from((name, background): (String, String)) -> Self {
+impl From<(String, Race, Profession)> for NewCharacter {
+    fn from((name, race, profession): (String, Race, Profession)) -> Self {
         Self::from((name, 1 as i32,
             roll_stat(),
             roll_stat(),
@@ -70,16 +70,16 @@ impl From<(String, String)> for NewCharacter {
             roll_stat(),
             roll_stat(),
             roll_stat(),
-            Some(background),
-            Race::Dwarf,
-            Profession::Barbarian,
+            None,
+            race,
+            profession,
             None))
     }
 }
 
 impl From<String> for NewCharacter {
     fn from(name: String) -> Self {
-        Self::from((name, String::new()))
+        Self::from((name, Race::Dwarf, Profession::Barbarian))
     }
 }
 
@@ -115,7 +115,7 @@ pub fn roll_stat() -> i32 {
     let mut rng = rand::thread_rng();
     let mut rolls = vec![0;5];
     for i in 0..rolls.len() {
-        rolls[i] = rng.gen_range(1..6);
+        rolls[i] = rng.gen_range(1..7);
     }
     rolls.sort();
     rolls[2] + rolls[3] + rolls[4]

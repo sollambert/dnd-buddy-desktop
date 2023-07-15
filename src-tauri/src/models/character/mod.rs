@@ -20,6 +20,47 @@ pub struct Character {
     pub profession: Profession
 }
 
+impl From<(u32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession)> for Character {
+    fn from((id, name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, background, race, profession):
+        (u32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession)) -> Self {
+        Self {
+            id,
+            name,
+            level,
+            strength,
+            dexterity,
+            constitution,
+            intelligence,
+            wisdom,
+            charisma,
+            background,
+            race: Race::Dwarf,
+            profession: Profession::Barbarian
+        }
+    }
+}
+
+impl From<(u32, String, String)> for Character {
+    fn from((id, name, background): (u32, String, String)) -> Self {
+        Self::from((id, name, 1,
+            roll_stat(),
+            roll_stat(),
+            roll_stat(),
+            roll_stat(),
+            roll_stat(),
+            roll_stat(),
+            background,
+            Race::Dwarf,
+            Profession::Barbarian))
+    }
+}
+
+impl From<(u32, String)> for Character {
+    fn from((id, name): (u32, String)) -> Self {
+        Self::from((id, name, String::new()))
+    }
+}
+
 #[derive(PartialEq, Debug, Clone)]
 pub enum Race {
     Dwarf,

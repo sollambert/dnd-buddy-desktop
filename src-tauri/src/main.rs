@@ -2,6 +2,8 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 use dnd_buddy_desktop::*;
 use tauri::Menu;
+pub mod models;
+pub mod schema;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 // #[tauri::command]

@@ -35,6 +35,14 @@ diesel::table! {
 }
 
 diesel::table! {
+    chatgptrequests (id) {
+        id -> Integer,
+        prompt -> Text,
+        temperature -> Float,
+    }
+}
+
+diesel::table! {
     encounters (id) {
         id -> Nullable<Integer>,
         notes -> Nullable<Text>,
@@ -76,6 +84,7 @@ diesel::allow_tables_to_appear_in_same_query!(
     campaign_notes,
     campaigns,
     characters,
+    chatgptrequests,
     encounters,
     entities,
     items,

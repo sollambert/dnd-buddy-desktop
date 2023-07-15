@@ -43,6 +43,18 @@ diesel::table! {
 }
 
 diesel::table! {
+    chatgptresponses (id) {
+        id -> Integer,
+        object -> Nullable<Text>,
+        created -> Integer,
+        model -> Nullable<Text>,
+        usage_id -> Nullable<Integer>,
+        gpt_id -> Nullable<Text>,
+        chatgptrequest_id -> Integer,
+    }
+}
+
+diesel::table! {
     encounters (id) {
         id -> Nullable<Integer>,
         notes -> Nullable<Text>,
@@ -77,6 +89,7 @@ diesel::table! {
 
 diesel::joinable!(campaign_notes -> campaigns (campaign_id));
 diesel::joinable!(characters -> campaigns (campaign_id));
+diesel::joinable!(chatgptresponses -> chatgptrequests (chatgptrequest_id));
 diesel::joinable!(entities -> encounters (encounter_id));
 diesel::joinable!(items -> encounters (encounter_id));
 
@@ -85,6 +98,7 @@ diesel::allow_tables_to_appear_in_same_query!(
     campaigns,
     characters,
     chatgptrequests,
+    chatgptresponses,
     encounters,
     entities,
     items,

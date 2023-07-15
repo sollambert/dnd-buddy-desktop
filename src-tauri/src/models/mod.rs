@@ -1,4 +1,4 @@
-pub mod character;
+pub mod characters;
 pub mod campaigns;
 pub mod chatgpt;
 pub mod encounters;

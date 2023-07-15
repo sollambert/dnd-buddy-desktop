@@ -1,8 +1,9 @@
 use diesel::prelude::*;
 
+use crate::models::campaigns::Campaign;
 use crate::schema::campaign_notes;
 
-#[derive(Queryable, Selectable, Identifiable, PartialEq, Debug, Clone)]
+#[derive(Queryable, Selectable, Associations, Identifiable, PartialEq, Debug, Clone)]
 #[diesel(belongs_to(Campaign))]
 #[diesel(table_name = campaign_notes)]
 pub struct CampaignNote {

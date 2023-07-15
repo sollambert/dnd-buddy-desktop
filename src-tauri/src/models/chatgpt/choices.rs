@@ -4,6 +4,7 @@ use crate::schema::choices;
 
 #[derive(Queryable, Selectable, Identifiable, PartialEq, Debug, Clone)]
 #[diesel(belongs_to(ChatGPTResponse))]
+#[diesel(belongs_to(Message))]
 #[diesel(table_name = choices)]
 pub struct Choice {
     pub id: i32,

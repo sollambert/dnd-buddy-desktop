@@ -1,36 +1,41 @@
 use diesel::sqlite::SqliteConnection;
 use diesel::prelude::*;
-use std::{error::Error, fs};
+use std::{error::Error, fs, path::Path, ffi::OsStr};
 use directories::ProjectDirs;
 
 use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("./migrations");
 
 
-pub fn init_config() {
+pub fn init() {
     if let Some(proj_dirs) = ProjectDirs::from("com", "sollambert", "dndbuddy") {
-        println!("{:?}", proj_dirs.config_dir());
         let app_dir = proj_dirs.config_dir();
-        if !app_dir.exists() {
-            let dir_builder = fs::DirBuilder::new();
-            match dir_builder.create(app_dir) {
+        create_folder(app_dir);
+        let db_path = Path::new(app_dir.as_os_str()).join("database.db");
+        if !db_path.exists() {
+            let db_url = format!("file:{}", db_path.to_str().unwrap());
+            let conn = establish_connection(&db_url);
+            match run_migrations(conn) {
                 Ok(()) => {
-                    println!("Local directory created at {:?}", app_dir);
-                }, 
+                    println!("Migrations successfully completed.")
+                },
                 Err(err) => {
-                    println!("Error encountered while creating local config folder: {}", err);
+                    println!("{}", err);
                 }
             }
         }
-        let db_url = format!("file:{}/database.db", app_dir.to_str().unwrap());
-        println!("{db_url}");
-        let conn = establish_connection(&db_url);
-        match run_migrations(conn) {
+    }
+}
+
+fn create_folder(path: &Path) {
+    if !path.exists() {
+        let dir_builder = fs::DirBuilder::new();
+        match dir_builder.create(path) {
             Ok(()) => {
-                println!("Migrations successfully completed.")
-            },
+                println!("Folder created at {:?}", path);
+            }, 
             Err(err) => {
-                println!("{}", err);
+                println!("Error encountered while creating folder: {}", err);
             }
         }
     }

@@ -7,7 +7,7 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "dnd-buddy-desktop",
+    "productName": "D&D Buddy",
     "version": "0.0.1"
   },
   "tauri": {

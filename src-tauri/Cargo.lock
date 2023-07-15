@@ -679,7 +679,7 @@ checksum = "bd0c93bb4b0c6d9b77f4435b0ae98c24d17f1c45b2ff844c6151a07256ca923b"
 
 [[package]]
 name = "dnd-buddy-desktop"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "diesel",
  "diesel_migrations",

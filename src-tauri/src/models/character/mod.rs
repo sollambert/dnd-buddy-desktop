@@ -4,6 +4,7 @@ use crate::schema::characters;
 use rand::Rng;
 
 #[derive(Queryable, Selectable, Identifiable, PartialEq, Debug, Clone)]
+#[diesel(belongs_to(Campaign))]
 #[diesel(table_name = characters)]
 pub struct Character {
     pub id: i32,
@@ -17,12 +18,13 @@ pub struct Character {
     pub charisma: u8,
     pub background: String,
     pub race: Race,
-    pub profession: Profession
+    pub profession: Profession,
+    pub campaign_id: i32
 }
 
-impl From<(i32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession)> for Character {
-    fn from((id, name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, background, race, profession):
-        (i32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession)) -> Self {
+impl From<(i32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession, i32)> for Character {
+    fn from((id, name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, background, race, profession, campaign_id):
+        (i32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession, i32)) -> Self {
         Self {
             id,
             name,
@@ -34,8 +36,9 @@ impl From<(i32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession)> f
             wisdom,
             charisma,
             background,
-            race: Race::Dwarf,
-            profession: Profession::Barbarian
+            race,
+            profession,
+            campaign_id
         }
     }
 }
@@ -51,7 +54,8 @@ impl From<(i32, String, String)> for Character {
             roll_stat(),
             background,
             Race::Dwarf,
-            Profession::Barbarian))
+            Profession::Barbarian,
+            -1))
     }
 }
 

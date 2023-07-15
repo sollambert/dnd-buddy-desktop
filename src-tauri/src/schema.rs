@@ -47,12 +47,24 @@ diesel::table! {
     }
 }
 
+diesel::table! {
+    entities (id) {
+        id -> Integer,
+        name -> Text,
+        description -> Nullable<Text>,
+        api_url -> Nullable<Text>,
+        encounter_id -> Integer,
+    }
+}
+
 diesel::joinable!(campaign_notes -> campaigns (campaign_id));
 diesel::joinable!(characters -> campaigns (campaign_id));
+diesel::joinable!(entities -> encounters (encounter_id));
 
 diesel::allow_tables_to_appear_in_same_query!(
     campaign_notes,
     campaigns,
     characters,
     encounters,
+    entities,
 );

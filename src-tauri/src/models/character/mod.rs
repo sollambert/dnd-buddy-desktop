@@ -6,7 +6,7 @@ use rand::Rng;
 #[derive(Queryable, Selectable, Identifiable, PartialEq, Debug, Clone)]
 #[diesel(table_name = characters)]
 pub struct Character {
-    pub id: u32,
+    pub id: i32,
     pub name: String,
     pub level: u8,
     pub strength: u8,
@@ -20,9 +20,9 @@ pub struct Character {
     pub profession: Profession
 }
 
-impl From<(u32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession)> for Character {
+impl From<(i32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession)> for Character {
     fn from((id, name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, background, race, profession):
-        (u32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession)) -> Self {
+        (i32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession)) -> Self {
         Self {
             id,
             name,
@@ -40,8 +40,8 @@ impl From<(u32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession)> f
     }
 }
 
-impl From<(u32, String, String)> for Character {
-    fn from((id, name, background): (u32, String, String)) -> Self {
+impl From<(i32, String, String)> for Character {
+    fn from((id, name, background): (i32, String, String)) -> Self {
         Self::from((id, name, 1,
             roll_stat(),
             roll_stat(),
@@ -55,8 +55,8 @@ impl From<(u32, String, String)> for Character {
     }
 }
 
-impl From<(u32, String)> for Character {
-    fn from((id, name): (u32, String)) -> Self {
+impl From<(i32, String)> for Character {
+    fn from((id, name): (i32, String)) -> Self {
         Self::from((id, name, String::new()))
     }
 }

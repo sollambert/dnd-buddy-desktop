@@ -1,2 +1,2 @@
 -- This file should undo anything in `up.sql`
-DROP TABLE chatgptrequests;
+DROP TABLE chat_gpt_requests;

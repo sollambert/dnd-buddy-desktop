@@ -3,6 +3,7 @@
 use dnd_buddy_desktop::*;
 use tauri::Menu;
 pub mod models;
+pub mod controllers;
 pub mod schema;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command

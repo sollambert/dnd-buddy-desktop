@@ -1,6 +1,7 @@
 use diesel::prelude::*;
 
 use crate::schema::characters;
+use rand::Rng;
 
 #[derive(Queryable, Selectable, Identifiable, PartialEq, Debug, Clone)]
 #[diesel(table_name = characters)]
@@ -45,4 +46,14 @@ pub enum Profession {
     Sorceror,
     Warlock,
     Wizard
+}
+
+pub fn roll_stat() -> u8 {
+    let mut rng = rand::thread_rng();
+    let mut rolls = vec![0 as u8;5];
+    for i in 0..rolls.len() {
+        rolls[i] = rng.gen_range(1..6);
+    }
+    rolls.sort();
+    rolls[2] + rolls[3] + rolls[4]
 }

@@ -21,28 +21,28 @@ pub struct Character {
 
 #[derive(PartialEq, Debug, Clone)]
 pub enum Race {
-    DWARF,
-    ELF,
-    GNOME,
-    HALF_ORC,
-    HALF_ELF,
-    HALFLING,
-    HUMAN,
-    TIEFLING
+    Dwarf,
+    Elf,
+    Gnome,
+    HalfOrc,
+    HalfElf,
+    Halfling,
+    Human,
+    Tiefling
 }
 
 #[derive(PartialEq, Debug, Clone)]
 pub enum Profession {
-    BARBARIAN,
-    BARD,
-    CLERIC,
-    DRUID,
-    FIGHTER,
-    MONK,
-    PALADIN,
-    RANGER,
-    ROGUE,
-    SORCEROR,
-    WARLOCK,
-    WIZARD
+    Barbarian,
+    Bard,
+    Cleric,
+    Druid,
+    Fighter,
+    Monk,
+    Paladin,
+    Ranger,
+    Rogue,
+    Sorceror,
+    Warlock,
+    Wizard
 }

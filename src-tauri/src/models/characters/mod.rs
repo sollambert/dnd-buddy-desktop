@@ -1,30 +1,32 @@
-use diesel::prelude::*;
+use diesel::{prelude::*, sql_types::*};
+use diesel_derive_enum::DbEnum;
 
+use crate::models::campaigns::Campaign;
 use crate::schema::characters;
 use rand::Rng;
 
-#[derive(Queryable, Selectable, Identifiable, PartialEq, Debug, Clone)]
+#[derive(Queryable, Selectable, Insertable, Associations, Identifiable, PartialEq, Debug, Clone)]
 #[diesel(belongs_to(Campaign))]
 #[diesel(table_name = characters)]
 pub struct Character {
     pub id: i32,
     pub name: String,
-    pub level: u8,
-    pub strength: u8,
-    pub dexterity: u8,
-    pub constitution: u8,
-    pub intelligence: u8,
-    pub wisdom: u8,
-    pub charisma: u8,
-    pub background: String,
+    pub level: i32,
+    pub strength: i32,
+    pub dexterity: i32,
+    pub constitution: i32,
+    pub intelligence: i32,
+    pub wisdom: i32,
+    pub charisma: i32,
+    pub background: Option<String>,
     pub race: Race,
     pub profession: Profession,
-    pub campaign_id: i32
+    pub campaign_id: Option<i32>
 }
 
-impl From<(i32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession, i32)> for Character {
+impl From<(i32, String, i32, i32, i32, i32, i32, i32, i32, Option<String>, Race, Profession, Option<i32>)> for Character {
     fn from((id, name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, background, race, profession, campaign_id):
-        (i32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession, i32)) -> Self {
+        (i32, String, i32, i32, i32, i32, i32, i32, i32, Option<String>, Race, Profession, Option<i32>)) -> Self {
         Self {
             id,
             name,
@@ -45,17 +47,17 @@ impl From<(i32, String, u8, u8, u8, u8, u8, u8, u8, String, Race, Profession, i3
 
 impl From<(i32, String, String)> for Character {
     fn from((id, name, background): (i32, String, String)) -> Self {
-        Self::from((id, name, 1,
+        Self::from((id, name, 1 as i32,
             roll_stat(),
             roll_stat(),
             roll_stat(),
             roll_stat(),
             roll_stat(),
             roll_stat(),
-            background,
+            Some(background),
             Race::Dwarf,
             Profession::Barbarian,
-            -1))
+            None))
     }
 }
 
@@ -65,7 +67,13 @@ impl From<(i32, String)> for Character {
     }
 }
 
-#[derive(PartialEq, Debug, Clone)]
+impl From<String> for Character {
+    fn from(name: String) -> Self {
+        Self::from((-1, name))
+    }
+}
+
+#[derive(PartialEq, Debug, Clone, DbEnum)]
 pub enum Race {
     Dwarf,
     Elf,
@@ -77,7 +85,7 @@ pub enum Race {
     Tiefling
 }
 
-#[derive(PartialEq, Debug, Clone)]
+#[derive(PartialEq, Debug, Clone, DbEnum)]
 pub enum Profession {
     Barbarian,
     Bard,
@@ -93,9 +101,9 @@ pub enum Profession {
     Wizard
 }
 
-pub fn roll_stat() -> u8 {
+pub fn roll_stat() -> i32 {
     let mut rng = rand::thread_rng();
-    let mut rolls = vec![0 as u8;5];
+    let mut rolls = vec![0;5];
     for i in 0..rolls.len() {
         rolls[i] = rng.gen_range(1..6);
     }

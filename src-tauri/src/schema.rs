@@ -17,6 +17,8 @@ diesel::table! {
 }
 
 diesel::table! {
+    use diesel::sql_types::*;
+    use crate::models::characters::{RaceMapping, ProfessionMapping};
     characters (id) {
         id -> Integer,
         name -> Text,
@@ -27,15 +29,15 @@ diesel::table! {
         intelligence -> Integer,
         wisdom -> Integer,
         charisma -> Integer,
-        race -> Integer,
-        profession -> Integer,
+        race -> RaceMapping,
+        profession -> ProfessionMapping,
         background -> Nullable<Text>,
         campaign_id -> Nullable<Integer>,
     }
 }
 
 diesel::table! {
-    chatgptrequests (id) {
+    chat_gpt_requests (id) {
         id -> Integer,
         prompt -> Text,
         temperature -> Float,
@@ -50,7 +52,7 @@ diesel::table! {
         model -> Nullable<Text>,
         usage_id -> Nullable<Integer>,
         gpt_id -> Nullable<Text>,
-        chatgptrequest_id -> Integer,
+        chat_gpt_request_id -> Integer,
     }
 }
 
@@ -60,7 +62,7 @@ diesel::table! {
         message_id -> Integer,
         finish_reason -> Nullable<Text>,
         index -> Integer,
-        chatgptresponse_id -> Integer,
+        chat_gpt_response_id -> Integer,
     }
 }
 
@@ -116,9 +118,7 @@ diesel::table! {
 
 diesel::joinable!(campaign_notes -> campaigns (campaign_id));
 diesel::joinable!(characters -> campaigns (campaign_id));
-diesel::joinable!(chatgptresponses -> chatgptrequests (chatgptrequest_id));
 diesel::joinable!(chatgptresponses -> usages (usage_id));
-diesel::joinable!(choices -> chatgptresponses (chatgptresponse_id));
 diesel::joinable!(choices -> messages (message_id));
 diesel::joinable!(entities -> encounters (encounter_id));
 diesel::joinable!(items -> encounters (encounter_id));
@@ -127,7 +127,7 @@ diesel::allow_tables_to_appear_in_same_query!(
     campaign_notes,
     campaigns,
     characters,
-    chatgptrequests,
+    chat_gpt_requests,
     chatgptresponses,
     choices,
     encounters,

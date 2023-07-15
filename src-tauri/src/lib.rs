@@ -6,6 +6,10 @@ use std::{error::Error, fs, path::Path};
 use directories::ProjectDirs;
 use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 
+pub mod models;
+pub mod controllers;
+pub mod schema;
+
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("./migrations");
 
 pub fn init() {
@@ -68,7 +72,7 @@ fn run_migrations(mut conn: SqliteConnection) -> Result<(), Box<dyn Error + Send
     Ok(())
 }
 
-fn establish_connection(db_url: &str) -> SqliteConnection {
+pub fn establish_connection(db_url: &str) -> SqliteConnection {
     SqliteConnection::establish(db_url)
         .unwrap_or_else(|_| panic!("Error connecting to db"))
 }

@@ -5,7 +5,7 @@ use crate::models::campaigns::Campaign;
 use crate::schema::characters;
 use rand::Rng;
 
-#[derive(Queryable, Selectable, Insertable, Associations, Identifiable, PartialEq, Debug, Clone)]
+#[derive(Queryable, Selectable, Associations, Identifiable, PartialEq, Debug, Clone)]
 #[diesel(belongs_to(Campaign))]
 #[diesel(table_name = characters)]
 pub struct Character {
@@ -24,11 +24,27 @@ pub struct Character {
     pub campaign_id: Option<i32>
 }
 
-impl From<(i32, String, i32, i32, i32, i32, i32, i32, i32, Option<String>, Race, Profession, Option<i32>)> for Character {
-    fn from((id, name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, background, race, profession, campaign_id):
-        (i32, String, i32, i32, i32, i32, i32, i32, i32, Option<String>, Race, Profession, Option<i32>)) -> Self {
+#[derive(Insertable)]
+#[diesel(table_name = characters)]
+pub struct NewCharacter {
+    pub name: String,
+    pub level: i32,
+    pub strength: i32,
+    pub dexterity: i32,
+    pub constitution: i32,
+    pub intelligence: i32,
+    pub wisdom: i32,
+    pub charisma: i32,
+    pub background: Option<String>,
+    pub race: Race,
+    pub profession: Profession,
+    pub campaign_id: Option<i32>
+}
+
+impl From<(String, i32, i32, i32, i32, i32, i32, i32, Option<String>, Race, Profession, Option<i32>)> for NewCharacter {
+    fn from((name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, background, race, profession, campaign_id):
+        (String, i32, i32, i32, i32, i32, i32, i32, Option<String>, Race, Profession, Option<i32>)) -> Self {
         Self {
-            id,
             name,
             level,
             strength,
@@ -45,9 +61,9 @@ impl From<(i32, String, i32, i32, i32, i32, i32, i32, i32, Option<String>, Race,
     }
 }
 
-impl From<(i32, String, String)> for Character {
-    fn from((id, name, background): (i32, String, String)) -> Self {
-        Self::from((id, name, 1 as i32,
+impl From<(String, String)> for NewCharacter {
+    fn from((name, background): (String, String)) -> Self {
+        Self::from((name, 1 as i32,
             roll_stat(),
             roll_stat(),
             roll_stat(),
@@ -61,15 +77,9 @@ impl From<(i32, String, String)> for Character {
     }
 }
 
-impl From<(i32, String)> for Character {
-    fn from((id, name): (i32, String)) -> Self {
-        Self::from((id, name, String::new()))
-    }
-}
-
-impl From<String> for Character {
+impl From<String> for NewCharacter {
     fn from(name: String) -> Self {
-        Self::from((-1, name))
+        Self::from((name, String::new()))
     }
 }
 

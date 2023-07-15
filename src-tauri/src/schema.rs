@@ -88,6 +88,14 @@ diesel::table! {
 }
 
 diesel::table! {
+    messages (id) {
+        id -> Integer,
+        role -> Nullable<Text>,
+        content -> Nullable<Text>,
+    }
+}
+
+diesel::table! {
     usages (id) {
         id -> Integer,
         prompt_tokens -> Integer,
@@ -112,5 +120,6 @@ diesel::allow_tables_to_appear_in_same_query!(
     encounters,
     entities,
     items,
+    messages,
     usages,
 );

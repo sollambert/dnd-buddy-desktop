@@ -87,9 +87,19 @@ diesel::table! {
     }
 }
 
+diesel::table! {
+    usages (id) {
+        id -> Integer,
+        prompt_tokens -> Integer,
+        completion_tokens -> Integer,
+        total_tokens -> Integer,
+    }
+}
+
 diesel::joinable!(campaign_notes -> campaigns (campaign_id));
 diesel::joinable!(characters -> campaigns (campaign_id));
 diesel::joinable!(chatgptresponses -> chatgptrequests (chatgptrequest_id));
+diesel::joinable!(chatgptresponses -> usages (usage_id));
 diesel::joinable!(entities -> encounters (encounter_id));
 diesel::joinable!(items -> encounters (encounter_id));
 
@@ -102,4 +112,5 @@ diesel::allow_tables_to_appear_in_same_query!(
     encounters,
     entities,
     items,
+    usages,
 );

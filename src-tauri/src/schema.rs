@@ -34,6 +34,19 @@ diesel::table! {
     }
 }
 
+diesel::table! {
+    encounters (id) {
+        id -> Nullable<Integer>,
+        notes -> Nullable<Text>,
+        cr -> Integer,
+        exp -> Integer,
+        name -> Text,
+        description -> Nullable<Text>,
+        image_url -> Nullable<Text>,
+        campaign_id -> Integer,
+    }
+}
+
 diesel::joinable!(campaign_notes -> campaigns (campaign_id));
 diesel::joinable!(characters -> campaigns (campaign_id));
 
@@ -41,4 +54,5 @@ diesel::allow_tables_to_appear_in_same_query!(
     campaign_notes,
     campaigns,
     characters,
+    encounters,
 );

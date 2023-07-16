@@ -1,3 +1,5 @@
+use std::str::FromStr;
+
 use diesel::{prelude::*, sql_types::*};
 use diesel_derive_enum::DbEnum;
 
@@ -95,6 +97,26 @@ pub enum Race {
     Tiefling
 }
 
+impl FromStr for Race {
+    type Err = ();
+    fn from_str(input: &str) -> Result<Race, Self::Err> {
+        let lower = input.to_lowercase();
+        let lower = lower.as_str();
+        println!("{}", lower);
+        match lower {
+            "dwarf" => Ok(Race::Dwarf),
+            "elf" => Ok(Race::Elf),
+            "gnome" => Ok(Race::Gnome),
+            "half_orc" => Ok(Race::HalfOrc),
+            "half_elf" => Ok(Race::HalfElf),
+            "halfling" => Ok(Race::Halfling),
+            "human" => Ok(Race::Human),
+            "tiefling" => Ok(Race::Tiefling),
+            _ => Err(())
+        }
+    }
+}
+
 #[derive(PartialEq, Debug, Clone, DbEnum)]
 pub enum Profession {
     Barbarian,
@@ -111,6 +133,30 @@ pub enum Profession {
     Wizard
 }
 
+impl FromStr for Profession {
+    type Err = ();
+    fn from_str(input: &str) -> Result<Profession, Self::Err> {
+        let lower = input.to_lowercase();
+        let lower = lower.as_str();
+        println!("{}", lower);
+        match lower {
+            "barbarian" => Ok(Profession::Barbarian),
+            "bard" => Ok(Profession::Bard),
+            "cleric" => Ok(Profession::Cleric),
+            "druid" => Ok(Profession::Druid),
+            "fighter" => Ok(Profession::Fighter),
+            "monk" => Ok(Profession::Monk),
+            "paladin" => Ok(Profession::Paladin),
+            "ranger" => Ok(Profession::Ranger),
+            "rogue" => Ok(Profession::Rogue),
+            "sorceror" => Ok(Profession::Sorceror),
+            "warlock" => Ok(Profession::Warlock),
+            "wizard" => Ok(Profession::Wizard),
+            _ => Err(())
+        }
+    }
+}
+
 pub fn roll_stat() -> i32 {
     let mut rng = rand::thread_rng();
     let mut rolls = vec![0;5];
@@ -120,3 +166,24 @@ pub fn roll_stat() -> i32 {
     rolls.sort();
     rolls[2] + rolls[3] + rolls[4]
 }
+
+// Special modifications for schema.rs
+// diesel::table! {
+//     use diesel::sql_types::*;
+//     use crate::models::characters::{RaceMapping, ProfessionMapping};
+//     characters (id) {
+//         id -> Integer,
+//         name -> Text,
+//         level -> Integer,
+//         strength -> Integer,
+//         dexterity -> Integer,
+//         constitution -> Integer,
+//         intelligence -> Integer,
+//         wisdom -> Integer,
+//         charisma -> Integer,
+//         race -> RaceMapping,
+//         profession -> ProfessionMapping,
+//         background -> Nullable<Text>,
+//         campaign_id -> Nullable<Integer>,
+//     }
+// }

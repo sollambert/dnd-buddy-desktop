@@ -1,7 +1,7 @@
 use diesel::sqlite::SqliteConnection;
 use diesel::prelude::*;
 use fast_log::Config;
-use log::{info,warn,error};
+use log::{info,error};
 use std::{error::Error, fs, path::Path};
 use directories::ProjectDirs;
 use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
@@ -18,6 +18,15 @@ pub fn init() {
         create_logger(app_dir);
         setup_files(app_dir);
     }
+}
+
+pub fn get_db_url() -> String {
+    if let Some(proj_dirs) = ProjectDirs::from("com", "sollambert", "dndbuddy") {
+        let app_dir = proj_dirs.config_dir();
+        let db_path = app_dir.join("database.db");
+        return db_path.to_str().unwrap().to_owned();
+    }
+    String::new()
 }
 
 fn create_logger(path: &Path) {

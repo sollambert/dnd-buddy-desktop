@@ -3,11 +3,13 @@ use std::str::FromStr;
 use diesel::{prelude::*, sql_types::*};
 use diesel_derive_enum::DbEnum;
 
+use serde::{Serialize, Deserialize, Serializer};
+
 use crate::models::campaigns::Campaign;
 use crate::schema::characters;
 use rand::Rng;
 
-#[derive(Queryable, Selectable, Associations, Identifiable, PartialEq, Debug, Clone)]
+#[derive(Queryable, Selectable, Associations, Identifiable, PartialEq, Debug, Clone, Serialize, Deserialize)]
 #[diesel(belongs_to(Campaign))]
 #[diesel(table_name = characters)]
 pub struct Character {
@@ -85,7 +87,7 @@ impl From<String> for NewCharacter {
     }
 }
 
-#[derive(PartialEq, Debug, Clone, DbEnum)]
+#[derive(PartialEq, Debug, Clone, DbEnum, Serialize, Deserialize)]
 pub enum Race {
     Dwarf,
     Elf,
@@ -117,7 +119,7 @@ impl FromStr for Race {
     }
 }
 
-#[derive(PartialEq, Debug, Clone, DbEnum)]
+#[derive(PartialEq, Debug, Clone, DbEnum, Serialize, Deserialize)]
 pub enum Profession {
     Barbarian,
     Bard,

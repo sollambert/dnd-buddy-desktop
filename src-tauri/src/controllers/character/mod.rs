@@ -8,27 +8,31 @@ use crate::models::characters::*;
 use crate::schema::characters::{table, dsl};
 
 #[tauri::command]
-pub fn new_default_character(name: String) {
+pub fn new_default_character(name: String) -> Option<Character> {
     let character = NewCharacter::from(name);
     match insert_new_character(character) {
         Ok(character) => {
-            info!("New character inserted: {:?}", character)
+            info!("New character inserted: {:?}", character);
+            Some(character)
         },
         Err(err) => {
             error!("{}", err);
+            None
         }
     }
 }
 
 #[tauri::command]
-pub fn new_character(name: String, race: Race, profession: Profession) {
-    let character = NewCharacter::from((name, race, profession));
+pub fn new_character(name: String, race: Race, profession: Profession, background:  Option<String>) -> Option<Character> {
+    let character = NewCharacter::from((name, race, profession, background));
     match insert_new_character(character) {
         Ok(character) => {
-            info!("New character inserted: {:?}", character)
+            info!("New character inserted: {:?}", character);
+            Some(character)
         },
         Err(err) => {
             error!("{}", err);
+            None
         }
     }
 }

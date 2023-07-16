@@ -6,6 +6,7 @@ import {postCharacter, putCharacter, getCharacter, getCharacters, deleteCharacte
 function* addCharacter({ payload, callback }: ActionTypes.AddCharacterAction) {
   try {
     let data: Character = yield call (postCharacter, payload);
+    console.log(data);
     yield put(ActionCreators.setCharacter(data));
     yield put(ActionCreators.getCharacters());
   } catch (error) {

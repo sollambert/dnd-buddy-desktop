@@ -19,5 +19,5 @@ fn main() {
 
     let race = Race::from_str(&race_str).unwrap();
     let profession = Profession::from_str(&profession_str).unwrap();
-    new_character(name, race, profession);
+    new_character(name, race, profession, None);
 }

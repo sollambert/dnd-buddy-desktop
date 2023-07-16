@@ -35,7 +35,7 @@ function CharacterDetails(): JSX.Element {
     }
 
     const handleDelete = (e: any, id: number) => {
-        dispatch(deleteCharacter(id));
+        dispatch(deleteCharacter(id, history.goBack));
     };
 
     return (

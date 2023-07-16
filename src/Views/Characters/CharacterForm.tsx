@@ -38,14 +38,13 @@ function CharacterForm({ editCharacter, editing, editHandler }: Props): JSX.Elem
         dispatch(updateCharacter(character, () => {
           if (editHandler)  {
             editHandler();
+            history.goBack();
           }
-          history.goBack();
         }))
       }
       else {
         dispatch(addCharacter(character, () => {
           setCharacter(initCharacter);
-          history.goBack();
         }));
       }
     } else {

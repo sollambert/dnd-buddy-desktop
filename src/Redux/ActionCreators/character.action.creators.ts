@@ -43,11 +43,10 @@ export function getCharacters(): actions.GetCharactersAction {
   };
 }
 
-export function deleteCharacter(
-  payload: number
-): actions.DeleteCharacterAction {
+export function deleteCharacter(payload: number, callback?: () => void): actions.DeleteCharacterAction {
   return {
     type: actions.DELETE_CHARACTER,
     payload,
+    callback
   };
 }

@@ -65,8 +65,8 @@ impl From<(String, i32, i32, i32, i32, i32, i32, i32, Option<String>, Race, Prof
     }
 }
 
-impl From<(String, Race, Profession)> for NewCharacter {
-    fn from((name, race, profession): (String, Race, Profession)) -> Self {
+impl From<(String, Race, Profession, Option<String>)> for NewCharacter {
+    fn from((name, race, profession, background): (String, Race, Profession, Option<String>)) -> Self {
         Self::from((name, 1 as i32,
             roll_stat(),
             roll_stat(),
@@ -74,7 +74,7 @@ impl From<(String, Race, Profession)> for NewCharacter {
             roll_stat(),
             roll_stat(),
             roll_stat(),
-            None,
+            background,
             race,
             profession,
             None))
@@ -83,7 +83,7 @@ impl From<(String, Race, Profession)> for NewCharacter {
 
 impl From<String> for NewCharacter {
     fn from(name: String) -> Self {
-        Self::from((name, Race::Dwarf, Profession::Barbarian))
+        Self::from((name, Race::Dwarf, Profession::Barbarian, None))
     }
 }
 

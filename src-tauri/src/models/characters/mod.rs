@@ -9,7 +9,7 @@ use crate::models::campaigns::Campaign;
 use crate::schema::characters;
 use rand::Rng;
 
-#[derive(Queryable, Selectable, Associations, Identifiable, PartialEq, Debug, Clone, Serialize, Deserialize)]
+#[derive(Queryable, Selectable, Associations, Identifiable, AsChangeset, PartialEq, Debug, Clone, Serialize, Deserialize)]
 #[diesel(belongs_to(Campaign))]
 #[diesel(table_name = characters)]
 pub struct Character {

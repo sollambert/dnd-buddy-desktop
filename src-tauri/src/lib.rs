@@ -22,7 +22,7 @@ pub fn init() {
 
 pub fn get_db_url() -> String {
     if let Some(proj_dirs) = ProjectDirs::from("com", "sollambert", "dndbuddy") {
-        let app_dir = proj_dirs.config_dir();
+        let app_dir = proj_dirs.data_dir();
         let db_path = app_dir.join("database.db");
         return db_path.to_str().unwrap().to_owned();
     }

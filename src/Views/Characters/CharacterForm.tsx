@@ -3,6 +3,7 @@ import FormInput from "../../Components/FormInput";
 import { useDispatch } from "react-redux";
 import { addCharacter, updateCharacter } from "../../Redux/ActionCreators/character.action.creators";
 import { Profession, Race } from "../../lib/character.constants";
+import { useHistory } from "react-router-dom";
 
 type Props = {
   editCharacter?: Character;
@@ -17,21 +18,35 @@ function CharacterForm({ editCharacter, editing, editHandler }: Props): JSX.Elem
 
   const dispatch = useDispatch();
 
+  const history = useHistory();
+
   function handleInput(event: any, key: string) {
     if (key === "level") {
       event.target.value = Math.max(1, Math.min(event.target.value, 20));
     }
     const inputKey = key as keyof typeof character;
-    setCharacter({ ...character, [inputKey]: event.target.value });
+      setCharacter(
+        { ...character,
+          [inputKey]: typeof character[inputKey] === "number" 
+          ? Number(event.target.value) 
+          : event.target.value });
   }
 
   const handleSubmit = (): void => {
     if (character.name !== "") {
       if (editing) {
-        dispatch(updateCharacter(character, editHandler))
+        dispatch(updateCharacter(character, () => {
+          if (editHandler)  {
+            editHandler();
+          }
+          history.goBack();
+        }))
       }
       else {
-        dispatch(addCharacter(character, () => setCharacter(initCharacter)))
+        dispatch(addCharacter(character, () => {
+          setCharacter(initCharacter);
+          history.goBack();
+        }));
       }
     } else {
       alert("Add a name dingus!");

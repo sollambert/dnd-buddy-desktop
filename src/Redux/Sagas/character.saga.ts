@@ -17,7 +17,7 @@ function* addCharacter({ payload, callback }: ActionTypes.AddCharacterAction) {
 
 function* updateCharacter({ payload, callback }: ActionTypes.UpdateCharacterAction) {
   try {
-    let { data } = yield call (putCharacter, payload);
+    let data: Character = yield call (putCharacter, payload);
     yield put(ActionCreators.setCharacter(data));
     yield put(ActionCreators.getCharacters());
   } catch (error) {

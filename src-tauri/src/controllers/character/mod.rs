@@ -87,6 +87,23 @@ pub fn get_all_characters() -> Option<Vec<Character>> {
 }
 
 #[tauri::command]
+pub fn update_character(character: Character) ->  Option<Character> {
+    let conn = &mut establish_connection(&get_db_url());
+    let id = character.id;
+    let results = 
+    conn.transaction::<_, diesel::result::Error, _>(|conn: &mut SqliteConnection| {
+        match diesel::update(dsl::characters.find(id))
+        .set(character)
+        .execute(conn) {
+            Ok(character) => {info!("Updated character: {character}")},
+            Err(err) => error!("{err}")
+        }
+        Ok(get_character_by_id(id))
+    }).unwrap();
+    results
+}
+
+#[tauri::command]
 pub fn delete_character(id: i32) -> usize {
     let conn = &mut establish_connection(&get_db_url());
     diesel::delete(dsl::characters.find(id))

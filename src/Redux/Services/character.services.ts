@@ -22,7 +22,8 @@ export async function postCharacter(
 export async function putCharacter(
     payload: Character
 ) : Promise<characterResponse> {
-    return await axios.put('/api/character', payload)
+    console.log(payload);
+    return await invoke("update_character", {character: payload});
 }
 
 export async function getCharacters() : Promise<charactersResponse> {

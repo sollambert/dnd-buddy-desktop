@@ -18,7 +18,8 @@ fn main() {
             get_character_by_id,
             new_character,
             new_default_character,
-            delete_character])
+            delete_character,
+            update_character])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

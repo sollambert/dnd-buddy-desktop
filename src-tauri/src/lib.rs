@@ -2,7 +2,7 @@ use diesel::sqlite::SqliteConnection;
 use diesel::prelude::*;
 use fast_log::Config;
 use log::{info,error};
-use std::{error::Error, fs, path::Path};
+use std::{error::Error, fs, path::{Path, PathBuf}};
 use directories::ProjectDirs;
 use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 
@@ -13,20 +13,23 @@ pub mod schema;
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("./migrations");
 
 pub fn init() {
-    if let Some(proj_dirs) = ProjectDirs::from("com", "sollambert", "dndbuddy") {
-        let app_dir = proj_dirs.config_dir();
-        create_logger(app_dir);
-        setup_files(app_dir);
+        let app_dir = get_app_path().unwrap();
+        create_logger(app_dir.as_path());
+        setup_files(app_dir.as_path());
+}
+
+pub fn get_app_path() -> Option<PathBuf> {
+    match ProjectDirs::from("com", "sollambert", "dndbuddy") {
+        Some(path) => {
+            Some(path.data_dir().to_owned())
+        },
+        None => None
     }
 }
 
 pub fn get_db_url() -> String {
-    if let Some(proj_dirs) = ProjectDirs::from("com", "sollambert", "dndbuddy") {
-        let app_dir = proj_dirs.data_dir();
-        let db_path = app_dir.join("database.db");
-        return db_path.to_str().unwrap().to_owned();
-    }
-    String::new()
+        let db_path = get_app_path().unwrap().join("database.db");
+        db_path.to_str().unwrap().to_string()
 }
 
 fn create_logger(path: &Path) {

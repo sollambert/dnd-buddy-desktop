@@ -48,3 +48,20 @@ fn insert_new_character(character: NewCharacter) -> Result<Character, Box<dyn Er
     let character = (&results.unwrap()[0]).to_owned();
     Ok(character)
 }
+
+pub fn get_character_by_id(id: i32) -> Option<Character> {
+    let conn = &mut establish_connection(get_db_url().as_str());
+    match dsl::characters
+        .find(id)
+        .select(Character::as_select())
+        .first(conn)
+        .optional() {
+            Ok(character) => {
+                character
+            },
+            Err(err) => {
+                error!("{}", err);
+                None
+            }
+        }
+}

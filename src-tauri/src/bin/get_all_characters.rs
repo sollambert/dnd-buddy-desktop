@@ -1,4 +1,4 @@
-use dnd_buddy_desktop::controllers::character::get_all_characters;
+use dnd_buddy_desktop::controllers::characters::get_all_characters;
 
 fn main() {
     let characters = get_all_characters();

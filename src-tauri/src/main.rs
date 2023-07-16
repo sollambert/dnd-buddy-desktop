@@ -1,6 +1,6 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-use dnd_buddy_desktop::{*, controllers::character::*};
+use dnd_buddy_desktop::{*, controllers::characters::*};
 use tauri::Menu;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command

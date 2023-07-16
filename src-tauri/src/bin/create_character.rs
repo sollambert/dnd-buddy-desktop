@@ -1,4 +1,4 @@
-use dnd_buddy_desktop::{*, controllers::character::new_character};
+use dnd_buddy_desktop::{*, controllers::characters::new_character};
 use std::{io::stdin,str::FromStr};
 use models::characters::{Race, Profession};
 

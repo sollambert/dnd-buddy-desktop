@@ -1,5 +1,5 @@
 use std::env::args;
-use dnd_buddy_desktop::controllers::character::get_character_by_id;
+use dnd_buddy_desktop::controllers::characters::get_character_by_id;
 
 fn main() {
     let character_id = args()

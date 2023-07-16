@@ -18,7 +18,7 @@
   },
   "include": ["src"],
   "paths": {
-    "*": ["@types/*.d.ts"]
+    "*": ["@types/*.d.ts", "lib/global.ts"]
   },
   "references": [{ "path": "./tsconfig.node.json" }]
 }

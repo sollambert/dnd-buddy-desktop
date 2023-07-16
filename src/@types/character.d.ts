@@ -11,5 +11,5 @@ declare type Character = {
     wisdom?: number;
     charisma?: number;
     background?: string;
-    campaignId?: number;
+    campaign_id?: number;
 }

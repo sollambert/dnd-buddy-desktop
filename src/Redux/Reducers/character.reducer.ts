@@ -14,7 +14,7 @@ const initialState: Character = {
   wisdom: 0,
   charisma: 0,
   background: "",
-  campaignId: undefined
+  campaign_id: undefined
 };
 
 export const charactersReducer = (

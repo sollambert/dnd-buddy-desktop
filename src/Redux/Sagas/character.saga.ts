@@ -5,7 +5,7 @@ import {postCharacter, putCharacter, getCharacter, getCharacters, deleteCharacte
 
 function* addCharacter({ payload, callback }: ActionTypes.AddCharacterAction) {
   try {
-    let { data } = yield call (postCharacter, payload);
+    let data: Character = yield call (postCharacter, payload);
     yield put(ActionCreators.setCharacter(data));
     yield put(ActionCreators.getCharacters());
   } catch (error) {
@@ -29,7 +29,8 @@ function* updateCharacter({ payload, callback }: ActionTypes.UpdateCharacterActi
 
 function* getAllCharacters({ callback }: ActionTypes.GetCharactersAction) {
   try {
-    let { data } = yield call (getCharacters);
+    let data: Array<Character> = yield call (getCharacters);
+    console.log(data);
     yield put(ActionCreators.setCharacters(data));
   } catch (error) {
     console.error(error);

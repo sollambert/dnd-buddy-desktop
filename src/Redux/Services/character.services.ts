@@ -1,3 +1,4 @@
+import { invoke } from "@tauri-apps/api/tauri";
 import axios from "axios";
 
 interface characterResponse {
@@ -15,7 +16,7 @@ interface charactersResponse {
 export async function postCharacter(
     payload: Character
 ) : Promise<characterResponse> {
-    return await axios.post('/api/character', payload)
+    return await invoke("new_character", payload);
 }
 
 export async function putCharacter(
@@ -25,7 +26,9 @@ export async function putCharacter(
 }
 
 export async function getCharacters() : Promise<charactersResponse> {
-    return await axios.get('/api/character');
+    return await invoke("get_all_characters");
+    // console.log(response);
+    // return response;
 }
 
 export async function getCharacter(

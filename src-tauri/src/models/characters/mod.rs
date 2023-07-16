@@ -3,7 +3,7 @@ use std::str::FromStr;
 use diesel::{prelude::*, sql_types::*};
 use diesel_derive_enum::DbEnum;
 
-use serde::{Serialize, Deserialize, Serializer};
+use serde::{Serialize, Deserialize};
 
 use crate::models::campaigns::Campaign;
 use crate::schema::characters;

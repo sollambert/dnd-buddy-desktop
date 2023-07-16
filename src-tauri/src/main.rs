@@ -13,7 +13,12 @@ fn main() {
     let menu = Menu::new();
     tauri::Builder::default()
         .menu(menu)
-        .invoke_handler(tauri::generate_handler![get_all_characters, get_character_by_id, new_character, new_default_character])
+        .invoke_handler(tauri::generate_handler![
+            get_all_characters,
+            get_character_by_id,
+            new_character,
+            new_default_character,
+            delete_character])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

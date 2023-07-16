@@ -85,3 +85,11 @@ pub fn get_all_characters() -> Option<Vec<Character>> {
             }
     }
 }
+
+#[tauri::command]
+pub fn delete_character(id: i32) -> usize {
+    let conn = &mut establish_connection(&get_db_url());
+    diesel::delete(dsl::characters.find(id))
+        .execute(conn)
+        .expect("Error deleting character")
+}

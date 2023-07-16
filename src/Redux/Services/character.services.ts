@@ -34,11 +34,11 @@ export async function getCharacters() : Promise<charactersResponse> {
 export async function getCharacter(
     payload: number
 ) : Promise<characterResponse> {
-    return await axios.get(`/api/character/${payload}`);
+    return await invoke("get_character_by_id", {id: payload});
 }
 
 export async function deleteCharacter(
     payload: number
 ) : Promise<deleteResponse> {
-    return await axios.delete(`/api/character/${payload}`);
+    return await invoke("delete_character", {id: payload});
 }

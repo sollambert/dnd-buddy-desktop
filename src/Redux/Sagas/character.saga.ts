@@ -41,7 +41,7 @@ function* getAllCharacters({ callback }: ActionTypes.GetCharactersAction) {
 
 function* getCharacterById({payload, callback }: ActionTypes.GetCharacterAction) {
   try {
-    let { data } = yield call (getCharacter, payload);
+    let data: Character = yield call (getCharacter, payload);
     yield put(ActionCreators.setCharacter(data));
   } catch (error) {
     console.error(error);

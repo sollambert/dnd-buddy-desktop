@@ -11,3 +11,14 @@ pub struct Campaign {
     pub name: String,
     pub description: String,
 }
+
+pub struct NewCampaign {
+    pub name: String,
+    pub description: String
+}
+
+impl From<String> for NewCampaign {
+    fn from(name: String) -> Self {
+        NewCampaign {name, description: String::new()}
+    }
+}

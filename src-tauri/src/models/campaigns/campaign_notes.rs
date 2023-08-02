@@ -12,6 +12,8 @@ pub struct CampaignNote {
     pub note: String
 }
 
+#[derive(Insertable)]
+#[diesel(table_name = campaign_notes)]
 pub struct NewCampaignNote {
     pub campaign_id: i32,
     pub note: String
@@ -19,6 +21,12 @@ pub struct NewCampaignNote {
 
 impl From<i32> for NewCampaignNote {
     fn from(campaign_id: i32) -> Self {
-        NewCampaignNote { campaign_id, note: String::new() }
+        Self::from ((campaign_id, String::new()))
+    }
+}
+
+impl From<(i32, String)> for NewCampaignNote {
+    fn from((campaign_id, note) : (i32, String)) -> Self {
+        NewCampaignNote { campaign_id, note }
     }
 }

@@ -8,6 +8,8 @@ use crate::{establish_connection, get_db_url};
 use crate::models::campaigns::*;
 use crate::schema::*;
 
+pub mod campaign_notes;
+
 #[tauri::command]
 pub fn new_campaign(name: String) -> Option<Campaign> {
     let campaign = NewCampaign::from(name);
@@ -42,7 +44,7 @@ fn insert_new_campaign(campaign: NewCampaign) -> Result<Campaign, Box<dyn Error 
 }
 
 #[tauri::command]
-fn get_campaign_by_id(id: i32) -> Option<CampaignResult> {
+pub fn get_campaign_by_id(id: i32) -> Option<CampaignResult> {
     let conn = &mut establish_connection(get_db_url().as_str());
 
     match campaigns::table

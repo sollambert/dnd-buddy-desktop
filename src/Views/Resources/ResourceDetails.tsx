@@ -8,7 +8,7 @@ import BackButton from "../../Components/Buttons/BackButton";
 type Props = {
   details: Details;
   direction?: any;
-  changeTitle?: boolean | undefined
+  changeTitle?: boolean | undefined;
   searchBar?: boolean | undefined;
 };
 

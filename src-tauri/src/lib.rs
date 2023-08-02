@@ -9,6 +9,7 @@ use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 pub mod models;
 pub mod controllers;
 pub mod schema;
+pub mod config;
 
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("./migrations");
 
@@ -63,18 +64,33 @@ fn setup_files(path: &Path) {
     } else {
         info!("Database file found.")
     }
+    let config_path = path.join("config.json");
+    let config_file = create_file(&config_path);
+    let config_json: config::Config = serde_json::from_reader(config_file)
+        .expect("Error parsing config file");
+    // info!("{:?}", config_json)
+}
+
+fn create_file(path: &Path) -> fs::File {
+    let file = fs::File::options()
+        .append(true)
+        .create(true)
+        .read(true)
+        .write(true)
+        .open(path)
+        .expect("Error creating file");
+    info!("Folder created at {:?}", path);
+    file
 }
 
 fn create_folder(path: &Path) {
-    if !path.exists() {
-        let dir_builder = fs::DirBuilder::new();
-        match dir_builder.create(path) {
-            Ok(()) => {
-                info!("Folder created at {:?}", path);
-            }, 
-            Err(err) => {
-                error!("Error encountered while creating folder: {err}");
-            }
+    let dir_builder = fs::DirBuilder::new();
+    match dir_builder.create(path) {
+        Ok(()) => {
+            info!("Folder created at {:?}", path);
+        }, 
+        Err(err) => {
+            error!("Error encountered while creating folder: {err}");
         }
     }
 }

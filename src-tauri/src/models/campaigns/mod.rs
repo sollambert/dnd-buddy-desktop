@@ -12,6 +12,8 @@ pub struct Campaign {
     pub description: String,
 }
 
+#[derive(Insertable)]
+#[diesel(table_name = campaigns)]
 pub struct NewCampaign {
     pub name: String,
     pub description: String
